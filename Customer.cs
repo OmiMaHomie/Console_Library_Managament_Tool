@@ -28,8 +28,10 @@ public class Customer : IUser
         CheckedOutBooks.Add(book);
 
         int index = library.Books.FindIndex(b => b.Isbn13 == book.Isbn13);
-        library.Books[index] = library.Books[index] with 
-            { IsAvailable = false };
+        library.Books[index] = library.Books[index] with
+        {
+            IsAvailable = false
+        };
     }
 
     public void ReturnBook(Library library, Book book)

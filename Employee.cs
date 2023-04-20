@@ -22,4 +22,15 @@ public class Employee : IUser
         Password = password;
         CheckedOutBooks = new();
     }
+
+    public void CheckOutBook(Library library, Book book)
+    {
+        CheckedOutBooks.Add(book);
+
+        int index = library.Books.FindIndex(b => b.Isbn13 == book.Isbn13);
+        library.Books[index] = library.Books[index] with
+        {
+            IsAvailable = false
+        };
+    }
 }
