@@ -28,10 +28,7 @@ public class Employee : IUser
         CheckedOutBooks.Add(book);
 
         int index = library.Books.FindIndex(b => b.Isbn13 == book.Isbn13);
-        library.Books[index] = library.Books[index] with
-        {
-            IsAvailable = false
-        };
+        library.Books[index].IsAvailable = false;
     }
 
     public void ReturnBook(Library library, Book book)
@@ -39,10 +36,7 @@ public class Employee : IUser
         CheckedOutBooks.Remove(book);
 
         int index = library.Books.FindIndex(b => b.Isbn13 == book.Isbn13);
-        library.Books[index] = library.Books[index] with
-        {
-            IsAvailable = true
-        };
+        library.Books[index].IsAvailable = true;
     }
     
     public void ProfileMenu(Library library)

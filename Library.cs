@@ -101,14 +101,40 @@ public class Library
                     {
                         Console.Clear();
                         Console.WriteLine(Books[index - 1]);
-                        
-                        if (user is Employee)
+
+                        if (Books[index - 1].IsAvailable)
                         {
-                            EmployeeBookOptions(index - 1);
+                            text =
+                                $"""
+
+                                Would you like to check out this book? (Y/N) 
+                                """;
+                            Console.Write(text);
+
+                            string checkOutInput = Console.ReadLine().ToUpper();
+                            if (checkOutInput == "Y")
+                            {
+                                user.CheckOutBook(this, Books[index - 1]);
+                                text =
+                                    $"""
+
+                                    {Books[index - 1].Title} checked out!
+                                    Press any key to continue...
+                                    """;
+                                Console.Write(text);
+                                Console.ReadKey();
+                            }
                         }
                         else
                         {
-                            CustomerBookOptions(index - 1);
+                            text =
+                                $"""
+
+                                Sorry, this book is currently checked out.
+                                Press any key to continue...
+                                """;
+                            Console.Write(text);
+                            Console.ReadKey();
                         }
                     }
                     else
@@ -142,57 +168,6 @@ public class Library
             }
             
             Console.Clear();
-        }
-        
-        void CustomerBookOptions(int index)
-        {
-            if (Books[index].IsAvailable)
-            {
-                text =
-                    $"""
-
-                    Would you like to check out this book? (Y/N) 
-                    """;
-                Console.Write(text);
-
-                string checkOutInput = Console.ReadLine().ToUpper();
-                if (checkOutInput == "Y")
-                {
-                    user.CheckOutBook(this, Books[index]);
-                    text =
-                        $"""
-
-                        {Books[index].Title} checked out!
-                        Press any key to continue...
-                        """;
-                    Console.Write(text);
-                    Console.ReadKey();
-                }
-            }
-            else
-            {
-                text =
-                    $"""
-
-                    Sorry, this book is currently checked out.
-                    Press any key to continue...
-                    """;
-                Console.Write(text);
-                Console.ReadKey();
-            }
-        }
-        
-        void EmployeeBookOptions(int index)
-        {
-            text = 
-                $""" 
-                
-                What would you like to do?
-                {(Books[index].IsAvailable ? "C - Check out book" : "Book is currently checked out.")}
-                E - Edit book
-                D - Delete book
-                R - Return to database
-                """;
         }
     }
 

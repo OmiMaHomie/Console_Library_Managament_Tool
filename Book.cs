@@ -3,52 +3,52 @@
 /// <summary>
 /// Holds all the information about a particular book.
 /// </summary>
-public readonly struct Book
+public class Book
 {
     /// <summary>
     /// Name of the book.
     /// </summary>
-    public string Title { get; init; }
+    public string Title { get; set; }
     
     /// <summary>
     /// Writer(s) of the book.
     /// </summary>
-    public string[] Authors { get; init; }
+    public string[] Authors { get; set; }
     
     /// <summary>
     /// A 13 digit number that uniquely identifies a book.
     /// </summary>
-    public ulong Isbn13 { get; init; }
+    public ulong Isbn13 { get; set; }
     
     /// <summary>
     /// The publisher of the book.
     /// </summary>
-    public string Publisher { get; init; }
+    public string Publisher { get; set; }
     
     /// <summary>
     /// The date the book was published.
     /// </summary>
-    public DateOnly PublicationDate { get; init; }
+    public DateOnly PublicationDate { get; set; }
     
     /// <summary>
     /// The language the book is written in.
     /// </summary>
-    public string Language { get; init; }
+    public string Language { get; set; }
     
     /// <summary>
     /// The genre(s) associated with the book.
     /// </summary>
-    public string[] Genres { get; init; }
+    public string[] Genres { get; set; }
     
     /// <summary>
     /// The number of pages in the book.
     /// </summary>
-    public ushort Pages { get; init; }
+    public ushort Pages { get; set; }
     
     /// <summary>
     /// Holds the availability of the book.
     /// </summary>
-    public bool IsAvailable { get; init; }
+    public bool IsAvailable { get; set; }
 
     /// <summary>
     /// Instantiates a book with custom values for each property, EXCEPT for IsAvailable. That is set to true by default.
