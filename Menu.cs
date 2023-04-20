@@ -64,10 +64,8 @@ public class Menu
                         User.ProfileMenu(_library);
                         break;
                     case "Q": 
-                        Console.WriteLine("Have a nice day!");
+                        Console.WriteLine("\nHave a nice day!");
                         return;
-                    default:
-                        break;
                 }
 
                 Console.Clear();

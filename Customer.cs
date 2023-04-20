@@ -39,13 +39,12 @@ public class Customer : IUser
         CheckedOutBooks.Remove(book);
         
         int index = library.Books.FindIndex(b => b.Isbn13 == book.Isbn13);
-        library.Books[index] = library.Books[index] with 
-            { IsAvailable = true };
+        library.Books[index] = library.Books[index] with
+        {
+            IsAvailable = true
+        };
     }
-
-    /// <summary>
-    /// Displays the user's profile menu.
-    /// </summary>
+    
     public void ProfileMenu(Library library)
     {
         string text;
@@ -79,12 +78,11 @@ public class Customer : IUser
             switch (Console.ReadLine().ToUpper())
             {
                 case var input when int.TryParse(input, out int index):
-                    Console.Clear();
-                    
                     if (index > 0 && index <= CheckedOutBooks.Count)
                     {
                         text =
                             $"""
+
                             {CheckedOutBooks[index - 1]}
                                 
                             Confirm return this book? (Y/N) 
@@ -105,18 +103,14 @@ public class Customer : IUser
                             
                             Console.ReadKey();
                         }
-                        else
-                        {
-                            break;
-                        }
                     }
                     else
                     {
                         text =
                             $"""
+
                                 Invalid book input!
                                 Press any key to continue...
-
                                 """;
                         Console.Write(text);
                         Console.ReadKey();
@@ -130,10 +124,10 @@ public class Customer : IUser
                 default:
                     text =
                         $"""
-                                Invalid input!
-                                Press any key to continue...
 
-                                """;
+                        Invalid input!
+                        Press any key to continue...
+                        """;
                     Console.Write(text);
                     Console.ReadKey();
                     break;

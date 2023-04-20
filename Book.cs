@@ -3,7 +3,7 @@
 /// <summary>
 /// Holds all the information about a particular book.
 /// </summary>
-public struct Book
+public readonly struct Book
 {
     /// <summary>
     /// Name of the book.
