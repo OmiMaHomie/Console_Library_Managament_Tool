@@ -23,19 +23,69 @@ public class Customer : IUser
         CheckedOutBooks = new();
     }
 
-    public void CheckOutBook(Library library, Book book)
+    public void CheckOutBook(Library library, int index)
     {
-        CheckedOutBooks.Add(book);
+        string text;
+        
+        if (index >= 0 && index < library.Books.Count)
+        {
+            Console.WriteLine(library.Books[index]);
 
-        int index = library.Books.FindIndex(b => b == book);
-        library.Books[index].IsAvailable = false;
+            if (library.Books[index].IsAvailable)
+            {
+                text =
+                    $"""
+
+                    Would you like to check out this book? (Y/N) 
+                    """;
+                Console.Write(text);
+
+                string checkOutInput = Console.ReadLine().ToUpper();
+                if (checkOutInput == "Y")
+                {
+                    CheckedOutBooks.Add(library.Books[index]);
+                    library.Books[index].IsAvailable = false;
+                    
+                    text =
+                        $"""
+
+                        {library.Books[index].Title} checked out!
+                        Press any key to continue...
+                        """;
+                    Console.Write(text);
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                text =
+                    $"""
+
+                    Sorry, this book is currently checked out.
+                    Press any key to continue...
+                    """;
+                Console.Write(text);
+                Console.ReadKey();
+            }
+        }
+        else
+        {
+            text =
+                $"""
+
+                Invalid book input!
+                Press any key to continue...
+                """;
+            Console.Write(text);
+            Console.ReadKey();
+        }
     }
 
     public void ReturnBook(Library library, Book book)
     {
         CheckedOutBooks.Remove(book);
         
-        int index = library.Books.FindIndex(b => b.Isbn13 == book.Isbn13);
+        int index = library.Books.FindIndex(b => b == book);
         library.Books[index].IsAvailable = true;
     }
     
@@ -69,9 +119,10 @@ public class Customer : IUser
                 """;
             Console.Write(text);
 
-            switch (Console.ReadLine().ToUpper())
+            string input = Console.ReadLine().ToUpper();
+            switch (input)
             {
-                case var input when int.TryParse(input, out int index):
+                case var _ when int.TryParse(input, out int index):
                     if (index > 0 && index <= CheckedOutBooks.Count)
                     {
                         text =
@@ -94,7 +145,6 @@ public class Customer : IUser
                             Console.Write(text);
                             
                             ReturnBook(library, CheckedOutBooks[index - 1]);
-                            
                             Console.ReadKey();
                         }
                     }

@@ -24,15 +24,15 @@ public interface IUser
     /// Checks out a book from the library.
     /// </summary>
     /// <param name="library">Reference to the library database.</param>
-    /// <param name="book">The book to be checked out.</param>
-    public void CheckOutBook(Library library, Book book);
+    /// <param name="index">The index of the where the book is.</param>
+    public void CheckOutBook(Library library, int index);
 
     /// <summary>
     /// Returns a book to the library.
     /// </summary>
     /// <param name="library">Reference to the library database.</param>
-    /// <param name="book">The book to be returned.</param>
-    public void ReturnBook(Library library, Book book);
+    /// <param name="index">The book to be returned.</param>
+    public void ReturnBook(Library library, Book index);
 
     /// <summary>
     /// Displays the user's profile menu.

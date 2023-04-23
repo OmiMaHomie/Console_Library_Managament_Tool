@@ -96,58 +96,9 @@ public class Library
                     }
 
                     break;
-                case var indexValue when int.TryParse(indexValue, out int index):
-                    if (index > 0 && index <= Books.Count)
-                    {
-                        Console.Clear();
-                        Console.WriteLine(Books[index - 1]);
-
-                        if (Books[index - 1].IsAvailable)
-                        {
-                            text =
-                                $"""
-
-                                Would you like to check out this book? (Y/N) 
-                                """;
-                            Console.Write(text);
-
-                            string checkOutInput = Console.ReadLine().ToUpper();
-                            if (checkOutInput == "Y")
-                            {
-                                user.CheckOutBook(this, Books[index - 1]);
-                                text =
-                                    $"""
-
-                                    {Books[index - 1].Title} checked out!
-                                    Press any key to continue...
-                                    """;
-                                Console.Write(text);
-                                Console.ReadKey();
-                            }
-                        }
-                        else
-                        {
-                            text =
-                                $"""
-
-                                Sorry, this book is currently checked out.
-                                Press any key to continue...
-                                """;
-                            Console.Write(text);
-                            Console.ReadKey();
-                        }
-                    }
-                    else
-                    {
-                        text =
-                            $"""
-
-                            Invalid book input!
-                            Press any key to continue...
-                            """;
-                        Console.Write(text);
-                        Console.ReadKey();
-                    }
+                case var _ when int.TryParse(input, out int index):
+                    Console.Clear();
+                    user.CheckOutBook(this, index - 1);
 
                     break;
                 case "Q":
@@ -158,9 +109,9 @@ public class Library
                     text =
                         $"""
 
-                            Invalid input!
-                            Press any key to continue...
-                            """;
+                        Invalid input!
+                        Press any key to continue...
+                        """;
                     Console.Write(text);
                     Console.ReadKey();
                     
