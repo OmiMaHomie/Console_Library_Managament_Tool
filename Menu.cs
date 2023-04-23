@@ -37,7 +37,7 @@ public class Menu
         {
             if (User == null)
             {
-                // TODO: Implement a login menu.
+                // TODO: Implement the login menu.
             }
             else
             {

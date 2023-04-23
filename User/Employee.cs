@@ -253,7 +253,211 @@ public class Employee : IUser
 
     private void ModifyBook(Book book)
     {
-        throw new NotImplementedException();
+        string text;
+
+        while (true)
+        {
+            Console.WriteLine(book);
+            text = 
+                $"""
+
+                What would you like to modify?
+                TTL - Title
+                AUT - Author(s)
+                ISBN - ISBN13
+                PUB - Publisher
+                PUB_D - Publish Date
+                LANG - Language
+                GEN - Genre(s)
+                PGS - Page Count
+                AVLB - Availability (WARNING)
+                R_B - Return book to library
+                R - Return to profile menu
+
+            
+                """;
+            // TODO: If a book is toggled available, remove it from any customer's personal library and notify them upon login.
+            // TODO: IF a book is toggle unavailable and no users have it in their personal library, notify employees.
+            Console.Write(text);
+            
+            string input = Console.ReadLine().ToUpper();
+            switch (input)
+            {
+                case "TTL":
+                    text = 
+                        $"""
+                        
+                        New title: 
+                        """;
+                    Console.Write(text);
+                    
+                    book.Title = Console.ReadLine();
+                    
+                    break;
+                case "AUT":
+                    text = 
+                        $"""
+                        
+                        New author(s) (separate with commas, no spaces between commas):  
+                        """;
+                    Console.Write(text);
+
+                    book.Authors = Console.ReadLine().Split(',');
+                    
+                    break;
+                case "ISBN":
+                    text = 
+                        $"""
+                        
+                        New ISBN13: 
+                        """;
+                    Console.Write(text);
+
+                    if (ulong.TryParse(Console.ReadLine(), out ulong isbn13))
+                    {
+                        book.Isbn13 = isbn13;
+                    }
+                    else
+                    {
+                        text =
+                            $"""
+
+                            Invalid ISBN13 input!
+                            Press any key to continue...
+                            """;
+                        Console.Write(text);
+                        Console.ReadKey();
+                    }
+                    
+                    break;
+                case "PUB":
+                    text = 
+                        $"""
+                        
+                        New publisher: 
+                        """;
+                    Console.Write(text);
+
+                    book.Publisher = Console.ReadLine();
+                    
+                    break;
+                case "PUB_D":
+                    text = 
+                        $"""
+                        
+                        New publish date (MM/DD/YYYY): 
+                        """;
+                    Console.Write(text);
+                    
+                    if (DateOnly.TryParse(Console.ReadLine(), out var publishDate))
+                    {
+                        book.PublicationDate = publishDate;
+                    }
+                    else
+                    {
+                        text =
+                            $"""
+
+                            Invalid publish date input!
+                            Press any key to continue...
+                            """;
+                        Console.Write(text);
+                        Console.ReadKey();
+                    }
+
+                    break;
+                case "LANG":
+                    text = 
+                        $"""
+                        
+                        New language: 
+                        """;
+                    Console.Write(text);
+                    
+                    book.Language = Console.ReadLine();
+                    
+                    break;
+                case "GEN":
+                    text = 
+                        $"""
+                        
+                        New genre(s) (separate with commas, no spaces between commas): 
+                        """;
+                    Console.Write(text);
+                    
+                    book.Genres = Console.ReadLine().Split(',');
+                    
+                    break;
+                case "PGS":
+                    text = 
+                        $"""
+                        
+                        New page count: 
+                        """;
+                    Console.Write(text);
+                    
+                    if (ushort.TryParse(Console.ReadLine(), out ushort pageCount))
+                    {
+                        book.Pages = pageCount;
+                    }
+                    else
+                    {
+                        text =
+                            $"""
+
+                            Invalid page count input!
+                            Press any key to continue...
+                            """;
+                        Console.Write(text);
+                        Console.ReadKey();
+                    }
+
+                    break;
+                case "AVLB":
+                    text = 
+                        $"""
+                        
+                        WARNING: Be sure to toggle this book back to its original state, as this function can cause duplicate books in database or books that can't be checked out.
+                        Toggle availability? (Y/N) 
+                        """;
+                    Console.Write(text);
+                    
+                    if (Console.ReadLine().ToUpper() == "Y")
+                    {
+                        book.IsAvailable = !book.IsAvailable;
+                    }
+                    
+                    break;
+                case "R_B":
+                    ToBeModifiedBooks.Remove(book);
+
+                    text = 
+                        $"""
+                        
+                        {book.Title} has been returned to the library!
+                        Press any key to continue...
+                        """;
+                    Console.Write(text);
+                    Console.ReadKey();
+
+                    return;
+                case "R":
+                    return;
+                default:
+                    text =
+                        $"""
+
+                        Invalid input!
+                        Press any key to continue...
+                        """;
+                    Console.Write(text);
+                    Console.ReadKey();
+
+                    break;
+            }
+            
+            Console.Clear();
+        }
     }
 
     /// <summary>

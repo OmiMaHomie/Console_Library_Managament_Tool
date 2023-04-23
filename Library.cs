@@ -33,13 +33,13 @@ public class Library
     public void BrowseBooks(IUser user)
     {
         var page = 1;
-        const int pageSize = 10;
+        const int PAGE_SIZE = 10;
         string text;
 
         while (true)
         {
             // Only loops from the start of the page to the end of the page.
-            for (int index = (page - 1) * pageSize; index < page * pageSize && index < Books.Count; index++)
+            for (int index = (page - 1) * PAGE_SIZE; index < page * PAGE_SIZE && index < Books.Count; index++)
             {
                 Console.WriteLine($"{index + 1}. {Books[index].ShortDescription()}");
             }
@@ -62,7 +62,7 @@ public class Library
             switch (input)
             {
                 case "N":
-                    if (page * pageSize < Books.Count)
+                    if (page * PAGE_SIZE < Books.Count)
                     {
                         page++;
                     }
