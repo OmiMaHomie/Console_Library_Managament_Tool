@@ -32,8 +32,8 @@ public class Library
     /// <param name="user">The user currently logged in.</param>
     public void BrowseBooks(IUser user)
     {
-        int page = 1;
-        int pageSize = 10;
+        var page = 1;
+        const int pageSize = 10;
         string text;
 
         while (true)
@@ -51,11 +51,12 @@ public class Library
                 
                 N - Next page
                 P - Previous page
-                {(user is Employee ? "Input the number of the book you want to view.": "Input the book number you want to check out.")}
+                "Input the number of the book you want to view."                
                 Q - Quit
 
+
                 """;
-            Console.WriteLine(text);
+            Console.Write(text);
             
             string input = Console.ReadLine().ToUpper();
             switch (input)
