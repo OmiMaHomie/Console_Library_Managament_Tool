@@ -1,5 +1,6 @@
 ﻿namespace Console_Library_Management_Tool;
 
+//TODO: Let an employee create a new employee profile inside of the profile menu.
 /// <summary>
 /// Represents a high-level employee of the library.
 /// </summary>
